@@ -1,0 +1,25 @@
+language: php
+
+sudo: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache/files
+
+matrix:
+    fast_finish: true
+    include:
+        - php: 7.1
+        - php: 7.2
+        - php: 7.3
+
+before_install:
+    - phpenv config-rm xdebug.ini || true
+    - if [ "$DEPENDENCIES" = "dev" ]; then perl -pi -e 's/^}$/,"minimum-stability":"dev"}/' composer.json; fi;
+
+install:
+    - composer update --no-interaction
+    - ./vendor/bin/simple-phpunit install
+
+script:
+    - ./vendor/bin/simple-phpunit
