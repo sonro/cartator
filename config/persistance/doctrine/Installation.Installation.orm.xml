@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    
+    <entity name="App\Core\Domain\Model\Installation\Installation">
+        <field name="name" type="string" length="190" />
+        <many-to-one field="database" 
+            target-entity="App\Core\Domain\Model\Database\Database" 
+            nullable="true"/>
+        <field name="dbTablePrefix" type="string" length="32" />
+    </entity>
+
+</doctrine-mapping>
