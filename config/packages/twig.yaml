@@ -1,0 +1,5 @@
+twig:
+    paths: 
+        '%kernel.project_dir%/src/Presentation/Templates/Twig': Web
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
