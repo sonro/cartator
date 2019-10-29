@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    
+    <entity name="App\Core\Domain\Model\Shop\Shop">
+        <field name="name" type="string" length="190" />
+        <field name="shortname" type="string" length="64"/>
+        <many-to-one field="installation" 
+            target-entity="App\Core\Domain\Model\Installation\Installation" 
+            nullable="true"/>
+        <field name="installationShopId" type="integer" length="190"/>
+        <field name="url" type="string" length="190"/>
+        <embedded name="shopMeta" 
+            class="App\Core\Domain\Model\Shop\ShopMeta" 
+            column-prefix="meta"/>
+        <field name="active" type="boolean" />
+    </entity>
+
+</doctrine-mapping>

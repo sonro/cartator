@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    
+    <entity name="App\Core\Domain\Model\Software\Software">
+        <many-to-one field="application" 
+            target-entity="App\Core\Domain\Model\Software\Application" 
+            nullable="false"/>
+        <field name="version" type="string" length="32" />
+        <field name="downloadUrl" type="string" length="190" />
+    </entity>
+
+</doctrine-mapping>

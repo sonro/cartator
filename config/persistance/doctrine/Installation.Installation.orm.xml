@@ -10,6 +10,14 @@
             target-entity="App\Core\Domain\Model\Database\Database" 
             nullable="true"/>
         <field name="dbTablePrefix" type="string" length="32" />
+        <many-to-one field="software" 
+            target-entity="App\Core\Domain\Model\Software\Software" 
+            nullable="false"/>
+        <field name="urlBase" type="string" />
+        <field name="urlAdmin" type="string" />
+        <field name="multistore" type="boolean" />
+        <field name="registered" type="boolean" />
+        <field name="active" type="boolean" />
     </entity>
 
 </doctrine-mapping>
