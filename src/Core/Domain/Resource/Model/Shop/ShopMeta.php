@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Domain\Model\Shop;
+namespace App\Core\Domain\Resource\Model\Shop;
 
 final class ShopMeta
 {

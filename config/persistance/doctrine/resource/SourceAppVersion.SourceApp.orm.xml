@@ -4,9 +4,11 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
-    <entity name="App\Core\Domain\Model\Database\DbUser">
-        <field name="username" type="string" length="190"/>
-        <field name="password" type="string" length="190"/>
+    <entity name="App\Core\Domain\Resource\Model\SourceAppVersion\SourceApp">
+        <field name="name" type="string" length="190" />
+        <field name="website" type="string" length="190" />
+        <field name="downloadsUrl" type="string" length="190" />
+        <field name="autoDownload" type="boolean" />
     </entity>
 
 </doctrine-mapping>

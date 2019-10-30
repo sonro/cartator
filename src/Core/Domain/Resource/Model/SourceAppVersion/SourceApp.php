@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Domain\Model\Software;
+namespace App\Core\Domain\Resource\Model\SourceAppVersion;
 
-use App\Core\Domain\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
 
-final class Application extends AbstractDomainEntity
+final class SourceApp extends AbstractDomainEntity
 {
     /**
      * @var string

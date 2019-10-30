@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
-    <embeddable name="App\Core\Domain\Model\Shop\ShopMeta">
+    <embeddable name="App\Core\Domain\Resource\Model\Shop\ShopMeta">
         <field name="title" type="string" length="190" />
         <field name="description" type="text" />
     </embeddable>

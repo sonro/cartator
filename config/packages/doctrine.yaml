@@ -17,8 +17,14 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            App:
+            Resource:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/config/persistance/doctrine'
-                prefix: 'App\Core\Domain\Model'
+                dir: '%kernel.project_dir%/config/persistance/doctrine/resource'
+                prefix: 'App\Core\Domain\Resource\Model'
+                alias: App
+            Data:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/persistance/doctrine/data'
+                prefix: 'App\Core\Domain\Data\Model'

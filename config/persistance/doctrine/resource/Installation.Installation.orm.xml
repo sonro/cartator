@@ -4,14 +4,14 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
-    <entity name="App\Core\Domain\Model\Installation\Installation">
+    <entity name="App\Core\Domain\Resource\Model\Installation\Installation">
         <field name="name" type="string" length="190" />
-        <many-to-one field="database" 
-            target-entity="App\Core\Domain\Model\Database\Database" 
+        <many-to-one field="sourceDb" 
+            target-entity="App\Core\Domain\Resource\Model\SourceDb\SourceDb" 
             nullable="true"/>
         <field name="dbTablePrefix" type="string" length="32" />
-        <many-to-one field="software" 
-            target-entity="App\Core\Domain\Model\Software\Software" 
+        <many-to-one field="sourceAppVersion" 
+            target-entity="App\Core\Domain\Resource\Model\SourceAppVersion\SourceAppVersion" 
             nullable="false"/>
         <field name="urlBase" type="string" />
         <field name="urlAdmin" type="string" />

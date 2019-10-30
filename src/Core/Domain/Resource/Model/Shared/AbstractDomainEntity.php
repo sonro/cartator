@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Domain\Model\Shared;
+namespace App\Core\Domain\Resource\Model\Shared;
 
 use DateTime;
 

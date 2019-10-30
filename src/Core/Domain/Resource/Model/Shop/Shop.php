@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Core\Domain\Model\Shop;
+namespace App\Core\Domain\Resource\Model\Shop;
 
-use App\Core\Domain\Model\Installation\Installation;
-use App\Core\Domain\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Resource\Model\Installation\Installation;
+use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
 
 final class Shop extends AbstractDomainEntity
 {

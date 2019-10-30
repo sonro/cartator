@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Domain\Model\Installation;
+namespace App\Core\Domain\Resource\Model\Installation;
 
-use App\Core\Domain\Model\Shared\AbstractDomainEntity;
-use App\Core\Domain\Model\Database\Database;
-use App\Core\Domain\Model\Software\Software;
+use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Resource\Model\SourceAppVersion\SourceAppVersion;
+use App\Core\Domain\Resource\Model\SourceDb\SourceDb;
 
 final class Installation extends AbstractDomainEntity
 {
@@ -14,9 +14,9 @@ final class Installation extends AbstractDomainEntity
     private $name;
 
     /**
-     * @var Database|null
+     * @var SourceDb|null
      */
-    private $database;
+    private $sourceDb;
 
     /**
      * @var string
@@ -24,9 +24,9 @@ final class Installation extends AbstractDomainEntity
     private $dbTablePrefix;
 
     /**
-     * @var Software
+     * @var SourceAppVersion
      */
-    private $software;
+    private $sourceAppVersion;
 
     /**
      * @var string
@@ -75,33 +75,9 @@ final class Installation extends AbstractDomainEntity
         return $this;
     }
 
-    /**
-     * Get the value of database.
-     *
-     * @return Database|null
-     */
-    public function getDatabase(): ?Database
+    public function hasSourceDb(): bool
     {
-        return $this->database;
-    }
-
-    /**
-     * Set the value of database.
-     *
-     * @param Database|null $database
-     *
-     * @return self
-     */
-    public function setDatabase(?Database $database): self
-    {
-        $this->database = $database;
-
-        return $this;
-    }
-
-    public function hasDatabase(): bool
-    {
-        if ($this->database === null) {
+        if ($this->sourceDb === null) {
             return false;
         }
 
@@ -128,30 +104,6 @@ final class Installation extends AbstractDomainEntity
     public function setDbTablePrefix(string $dbTablePrefix): self
     {
         $this->dbTablePrefix = $dbTablePrefix;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of software.
-     *
-     * @return Software
-     */
-    public function getSoftware(): Software
-    {
-        return $this->software;
-    }
-
-    /**
-     * Set the value of software.
-     *
-     * @param Software $software
-     *
-     * @return self
-     */
-    public function setSoftware(Software $software): self
-    {
-        $this->software = $software;
 
         return $this;
     }
@@ -272,6 +224,54 @@ final class Installation extends AbstractDomainEntity
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sourceDb.
+     *
+     * @return SourceDb|null
+     */
+    public function getSourceDb()
+    {
+        return $this->sourceDb;
+    }
+
+    /**
+     * Set the value of sourceDb.
+     *
+     * @param SourceDb|null $sourceDb
+     *
+     * @return self
+     */
+    public function setSourceDb($sourceDb)
+    {
+        $this->sourceDb = $sourceDb;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sourceAppVersion.
+     *
+     * @return SourceAppVersion
+     */
+    public function getSourceAppVersion()
+    {
+        return $this->sourceAppVersion;
+    }
+
+    /**
+     * Set the value of sourceAppVersion.
+     *
+     * @param SourceAppVersion $sourceAppVersion
+     *
+     * @return self
+     */
+    public function setSourceAppVersion(SourceAppVersion $sourceAppVersion)
+    {
+        $this->sourceAppVersion = $sourceAppVersion;
 
         return $this;
     }

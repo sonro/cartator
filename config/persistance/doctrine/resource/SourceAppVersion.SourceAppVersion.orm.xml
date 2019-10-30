@@ -4,12 +4,12 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
-    <entity name="App\Core\Domain\Model\Database\Database">
-        <field name="dbName" type="string" length="190"/>
-        <field name="dbHost" type="string" length="190"/>
-        <many-to-one field="dbUser" 
-            target-entity="App\Core\Domain\Model\Database\DbUser" 
-            />
+    <entity name="App\Core\Domain\Resource\Model\SourceAppVersion\SourceAppVersion">
+        <many-to-one field="sourceApp" 
+            target-entity="App\Core\Domain\Resource\Model\SourceAppVersion\SourceApp" 
+            nullable="false"/>
+        <field name="version" type="string" length="32" />
+        <field name="downloadUrl" type="string" length="190" />
     </entity>
 
 </doctrine-mapping>
