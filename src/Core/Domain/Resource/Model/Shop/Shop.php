@@ -25,7 +25,7 @@ final class Shop extends AbstractDomainEntity
     /**
      * @var int
      */
-    private $installationShopId;
+    private $sourceShopId;
 
     /**
      * @var string
@@ -115,25 +115,25 @@ final class Shop extends AbstractDomainEntity
     }
 
     /**
-     * Get the value of installationShopId.
+     * Get the value of sourceShopId.
      *
      * @return int
      */
-    public function getInstallationShopId()
+    public function getSourceShopId()
     {
-        return $this->installationShopId;
+        return $this->sourceShopId;
     }
 
     /**
-     * Set the value of installationShopId.
+     * Set the value of sourceShopId.
      *
-     * @param int $installationShopId
+     * @param int $sourceShopId
      *
      * @return self
      */
-    public function setInstallationShopId(int $installationShopId)
+    public function setSourceShopId(int $sourceShopId)
     {
-        $this->installationShopId = $installationShopId;
+        $this->sourceShopId = $sourceShopId;
 
         return $this;
     }

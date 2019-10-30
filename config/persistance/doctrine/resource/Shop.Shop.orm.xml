@@ -10,11 +10,11 @@
         <many-to-one field="installation" 
             target-entity="App\Core\Domain\Resource\Model\Installation\Installation" 
             nullable="true"/>
-        <field name="installationShopId" type="integer" length="190"/>
+        <field name="sourceShopId" type="integer" length="190"/>
         <field name="url" type="string" length="190"/>
         <embedded name="shopMeta" 
             class="App\Core\Domain\Resource\Model\Shop\ShopMeta" 
-            column-prefix="meta"/>
+            column-prefix="meta_"/>
         <field name="active" type="boolean" />
     </entity>
 
