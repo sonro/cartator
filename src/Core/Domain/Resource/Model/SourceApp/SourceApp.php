@@ -2,7 +2,10 @@
 
 namespace App\Core\Domain\Resource\Model\SourceApp;
 
+use App\Core\Domain\Resource\Model\Accessor\Accessor;
 use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 final class SourceApp extends AbstractDomainEntity
 {
@@ -25,6 +28,16 @@ final class SourceApp extends AbstractDomainEntity
      * @var bool
      */
     private $autoDownload;
+
+    /**
+     * @var Collection
+     */
+    private $accessors;
+
+    public function __construct()
+    {
+        $this->accessors = new ArrayCollection();
+    }
 
     /**
      * Get the value of name.
@@ -118,6 +131,53 @@ final class SourceApp extends AbstractDomainEntity
     public function setDownloadsUrl(string $downloadsUrl)
     {
         $this->downloadsUrl = $downloadsUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of accessors.
+     *
+     * @return Collection
+     */
+    public function getAccessors()
+    {
+        return $this->accessors;
+    }
+
+    /**
+     * Associate an Accesssor with this SourceApp.
+     *
+     * @param Accessor $accessor
+     *
+     * @return self
+     */
+    public function addAccessor(Accessor $accessor)
+    {
+        if ($this->accessors->contains($accessor)) {
+            return;
+        }
+
+        $this->accessors->add($accessor);
+
+        $accessor->addSupportedSourceApp($this);
+
+        return $this;
+    }
+
+    /**
+     * Disassociate an Accessor with this SourceApp.
+     *
+     * @param Accessor $accessor
+     *
+     * @return self
+     */
+    public function removeAccessor(Accessor $accessor)
+    {
+        if ($this->accessors->contains($accessor)) {
+            $this->accessors->removeElement($accessor);
+            $accessor->removeSupportedSourceApp($this);
+        }
 
         return $this;
     }
