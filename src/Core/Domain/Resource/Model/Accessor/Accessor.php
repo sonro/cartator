@@ -108,6 +108,18 @@ final class Accessor extends AbstractDomainEntity
     }
 
     /**
+     * Check if this accessor will support a specific source data type.
+     *
+     * @param string $dataType
+     *
+     * @return bool
+     */
+    public function supportsDataType(string $dataType)
+    {
+        return in_array($dataType, $this->supportedDataTypes, true);
+    }
+
+    /**
      * Get the value of supportedSourceApps.
      *
      * @return Collection
