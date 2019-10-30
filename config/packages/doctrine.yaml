@@ -28,3 +28,8 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/config/persistance/doctrine/data'
                 prefix: 'App\Core\Domain\Data\Model'
+            SourceAccess:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/persistance/doctrine/source_access'
+                prefix: 'App\Core\Domain\SourceAccess\Model'

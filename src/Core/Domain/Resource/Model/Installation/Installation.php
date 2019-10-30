@@ -5,6 +5,7 @@ namespace App\Core\Domain\Resource\Model\Installation;
 use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
 use App\Core\Domain\Resource\Model\SourceAppVersion\SourceAppVersion;
 use App\Core\Domain\Resource\Model\SourceDb\SourceDb;
+use App\Core\Domain\SourceAccess\Model\Accessor\Accessor;
 
 final class Installation extends AbstractDomainEntity
 {
@@ -52,6 +53,11 @@ final class Installation extends AbstractDomainEntity
      * @var bool
      */
     private $active = true;
+
+    /**
+     * @var Accessor
+     */
+    private $accessor;
 
     /**
      * Get the value of name.
@@ -272,6 +278,30 @@ final class Installation extends AbstractDomainEntity
     public function setSourceAppVersion(SourceAppVersion $sourceAppVersion)
     {
         $this->sourceAppVersion = $sourceAppVersion;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of accessor.
+     *
+     * @return Accessor
+     */
+    public function getAccessor()
+    {
+        return $this->accessor;
+    }
+
+    /**
+     * Set the value of accessor.
+     *
+     * @param Accessor $accessor
+     *
+     * @return self
+     */
+    public function setAccessor(Accessor $accessor)
+    {
+        $this->accessor = $accessor;
 
         return $this;
     }

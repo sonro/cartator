@@ -5,12 +5,12 @@
         https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
     <entity name="App\Core\Domain\Resource\Model\SourceApp\SourceApp">
-        <field name="name" type="string" length="190" />
+        <field name="name" type="string" length="190" unique="true"/>
         <field name="website" type="string" length="190" />
         <field name="downloadsUrl" type="string" length="190" />
         <field name="autoDownload" type="boolean" />
         <many-to-many field="accessors" 
-            target-entity="App\Core\Domain\Resource\Model\Accessor\Accessor" 
+            target-entity="App\Core\Domain\SourceAccess\Model\Accessor\Accessor" 
             mapped-by="supportedSourceApps" />
     </entity>
 

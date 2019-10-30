@@ -4,13 +4,16 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
-    <entity name="App\Core\Domain\Resource\Model\Accessor\Accessor">
-        <field name="name" type="string" length="190" />
-        <field name="className" type="string" length="190" />
-        <field name="supportedDataTypes" type="simple_array" />
+    <entity name="App\Core\Domain\SourceAccess\Model\Accessor\Accessor">
+        <embedded name="method" 
+            class="App\Core\Domain\SourceAccess\Model\Accessor\AccessorMethod" />
+        <many-to-many field="supportedDataTypes" 
+            target-entity="App\Core\Domain\SourceAccess\Model\DataType\DataType" />
         <many-to-many field="supportedSourceApps" 
             target-entity="App\Core\Domain\Resource\Model\SourceApp\SourceApp" 
             inversed-by="accessors" />
+        <many-to-many field="supportedSourceQueries" 
+            target-entity="App\Core\Domain\SourceAccess\Model\SourceQuery\SourceQuery" />
     </entity>
 
 </doctrine-mapping>

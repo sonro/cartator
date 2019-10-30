@@ -18,6 +18,9 @@
         <field name="multistore" type="boolean" />
         <field name="registered" type="boolean" />
         <field name="active" type="boolean" />
+        <many-to-one field="accessor" 
+            target-entity="App\Core\Domain\SourceAccess\Model\Accessor\Accessor" 
+            nullable="false"/>
     </entity>
 
 </doctrine-mapping>

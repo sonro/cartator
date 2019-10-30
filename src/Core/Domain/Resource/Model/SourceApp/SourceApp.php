@@ -2,8 +2,8 @@
 
 namespace App\Core\Domain\Resource\Model\SourceApp;
 
-use App\Core\Domain\Resource\Model\Accessor\Accessor;
 use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\SourceAccess\Model\Accessor\Accessor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
