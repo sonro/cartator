@@ -6,7 +6,7 @@
     
     <entity name="App\Core\Domain\Resource\Model\SourceAppVersion\SourceAppVersion">
         <many-to-one field="sourceApp" 
-            target-entity="App\Core\Domain\Resource\Model\SourceAppVersion\SourceApp" 
+            target-entity="App\Core\Domain\Resource\Model\SourceApp\SourceApp" 
             nullable="false"/>
         <field name="version" type="string" length="32" />
         <field name="downloadUrl" type="string" length="190" />

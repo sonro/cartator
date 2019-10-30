@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Domain\Resource\Model\SourceAppVersion;
+namespace App\Core\Domain\Resource\Model\SourceApp;
 
 use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
 

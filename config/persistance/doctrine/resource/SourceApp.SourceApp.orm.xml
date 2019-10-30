@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
-    <entity name="App\Core\Domain\Resource\Model\SourceAppVersion\SourceApp">
+    <entity name="App\Core\Domain\Resource\Model\SourceApp\SourceApp">
         <field name="name" type="string" length="190" />
         <field name="website" type="string" length="190" />
         <field name="downloadsUrl" type="string" length="190" />

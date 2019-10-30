@@ -3,6 +3,7 @@
 namespace App\Core\Domain\Resource\Model\SourceAppVersion;
 
 use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Resource\Model\SourceApp\SourceApp;
 
 final class SourceAppVersion extends AbstractDomainEntity
 {
