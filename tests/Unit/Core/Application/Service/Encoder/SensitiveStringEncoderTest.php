@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Unit\Core\Application\Service\Encoder;
+namespace App\Tests\Unit\Core\Application\Service\Encoder;
 
 use App\Core\Application\Service\Encoder\SensitiveStringEncoder;
 use PHPUnit\Framework\TestCase;
