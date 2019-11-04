@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Unit\Core\Application\Service\Encoder;
+namespace App\Tests\Unit\Core\Application\Util\Encoder;
 
-use App\Core\Application\Service\Encoder\SensitiveStringEncoder;
+use App\Core\Application\Util\Encoder\SensitiveStringEncoder;
 use PHPUnit\Framework\TestCase;
 
 final class SensitiveStringEncoderTest extends TestCase

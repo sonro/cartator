@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Application\Service\Encoder;
+namespace App\Core\Application\Util\Encoder;
 
 interface SensitiveStringEncoderInterface
 {
