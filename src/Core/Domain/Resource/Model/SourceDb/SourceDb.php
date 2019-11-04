@@ -17,9 +17,14 @@ final class SourceDb extends AbstractDomainEntity
     private $dbUser;
 
     /**
-     * @var string
+     * @var DbHost
      */
     private $dbHost;
+
+    /**
+     * @return string
+     */
+    private $dbCharset = 'utf8';
 
     /**
      * Get the value of dbName.
@@ -68,11 +73,31 @@ final class SourceDb extends AbstractDomainEntity
     }
 
     /**
+     * Get the value of dbCharset.
+     */
+    public function getDbCharset()
+    {
+        return $this->dbCharset;
+    }
+
+    /**
+     * Set the value of dbCharset.
+     *
+     * @return self
+     */
+    public function setDbCharset($dbCharset)
+    {
+        $this->dbCharset = $dbCharset;
+
+        return $this;
+    }
+
+    /**
      * Get the value of dbHost.
      *
-     * @return string
+     * @return DbHost
      */
-    public function getDbHost(): string
+    public function getDbHost()
     {
         return $this->dbHost;
     }
@@ -80,11 +105,11 @@ final class SourceDb extends AbstractDomainEntity
     /**
      * Set the value of dbHost.
      *
-     * @param string $dbHost
+     * @param DbHost $dbHost
      *
      * @return self
      */
-    public function setDbHost(string $dbHost): self
+    public function setDbHost(DbHost $dbHost)
     {
         $this->dbHost = $dbHost;
 

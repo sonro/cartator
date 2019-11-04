@@ -17,6 +17,11 @@ final class DbUser extends AbstractDomainEntity
     private $password;
 
     /**
+     * @var DbHost
+     */
+    private $dbHost;
+
+    /**
      * Get the value of username.
      *
      * @return string
@@ -60,6 +65,30 @@ final class DbUser extends AbstractDomainEntity
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of dbHost.
+     *
+     * @return DbHost
+     */
+    public function getDbHost()
+    {
+        return $this->dbHost;
+    }
+
+    /**
+     * Set the value of dbHost.
+     *
+     * @param DbHost $dbHost
+     *
+     * @return self
+     */
+    public function setDbHost(DbHost $dbHost)
+    {
+        $this->dbHost = $dbHost;
 
         return $this;
     }

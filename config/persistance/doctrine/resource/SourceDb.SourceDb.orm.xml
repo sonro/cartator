@@ -6,10 +6,13 @@
     
     <entity name="App\Core\Domain\Resource\Model\SourceDb\SourceDb">
         <field name="dbName" type="string" length="190"/>
-        <field name="dbHost" type="string" length="190"/>
         <many-to-one field="dbUser" 
             target-entity="App\Core\Domain\Resource\Model\SourceDb\DbUser" 
             />
+        <many-to-one field="dbHost" 
+            target-entity="App\Core\Domain\Resource\Model\SourceDb\DbHost"
+            />
+        <field name="dbCharset" type="string" length="32"/>
     </entity>
 
 </doctrine-mapping>
