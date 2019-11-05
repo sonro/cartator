@@ -249,7 +249,7 @@ final class SafeMySQLSourceDbTest extends TestCase
         }
 
         $result = $conn->getAll('SELECT * FROM ?n WHERE id>?i', self::$testTable, 5);
-        $this->assertEmpty($result);
+        $this->assertFalse($result);
     }
 
     public static function setUpBeforeClass()

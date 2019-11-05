@@ -151,7 +151,12 @@ final class SafeMySQLSourceDb implements SourceDbInterface
     public function getAll(string $query, ...$args)
     {
         try {
-            return $this->safeMySQL->getAll($query, ...$args);
+            $data = $this->safeMySQL->getAll($query, ...$args);
+            if (empty($data)) {
+                return false;
+            }
+
+            return $data;
         } catch (Exception $e) {
             throw new SourceDbException($e->getMessage(), $e->getCode());
         }
@@ -163,7 +168,12 @@ final class SafeMySQLSourceDb implements SourceDbInterface
     public function getInd(string $index, string $query, ...$args)
     {
         try {
-            return $this->safeMySQL->getInd($index, $query, ...$args);
+            $data = $this->safeMySQL->getInd($index, $query, ...$args);
+            if (empty($data)) {
+                return false;
+            }
+
+            return $data;
         } catch (Exception $e) {
             throw new SourceDbException($e->getMessage(), $e->getCode());
         }
@@ -172,7 +182,12 @@ final class SafeMySQLSourceDb implements SourceDbInterface
     public function getIndCol(string $index, string $query, ...$args)
     {
         try {
-            return $this->safeMySQL->getIndCol($query, ...$args);
+            $data = $this->safeMySQL->getIndCol($query, ...$args);
+            if (empty($data)) {
+                return false;
+            }
+
+            return $data;
         } catch (Exception $e) {
             throw new SourceDbException($e->getMessage(), $e->getCode());
         }

@@ -114,7 +114,7 @@ interface SourceDbInterface
      * @param string $query    - an SQL query with placeholders
      * @param mixed  $args,... unlimited number of arguments to match placeholders in the query
      *
-     * @return array enumerated 2d array contains the resultset. Empty if no rows found.
+     * @return array|false enumerated 2d array contains the resultset. False if no rows found.
      */
     public function getAll(string $query, ...$args);
 
@@ -129,7 +129,7 @@ interface SourceDbInterface
      * @param string $query    - an SQL query with placeholders
      * @param mixed  $args,... unlimited number of arguments to match placeholders in the query
      *
-     * @return array - associative 2d array contains the resultset. Empty if no rows found.
+     * @return array|false - associative 2d array contains the resultset. False if no rows found.
      */
     public function getInd(string $index, string $query, ...$args);
 
@@ -143,7 +143,7 @@ interface SourceDbInterface
      * @param string $query   - an SQL query with placeholders
      * @param mixed  $args... unlimited number of arguments to match placeholders in the query
      *
-     * @return array - associative array contains key=value pairs out of resultset. Empty if no rows found.
+     * @return array|false - associative array contains key=value pairs out of resultset. False if no rows found.
      */
     public function getIndCol(string $index, string $query, ...$args);
 
