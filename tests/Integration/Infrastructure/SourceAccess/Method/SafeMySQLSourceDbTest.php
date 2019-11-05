@@ -61,6 +61,14 @@ final class SafeMySQLSourceDbTest extends TestCase
         self::loadDb();
     }
 
+    public static function tearDownAfterClass()
+    {
+        $pdo = self::getConnection();
+        $dbName = self::$sourceDbDto->getDb();
+        $pdo->exec("DROP DATABASE IF EXISTS $dbName");
+        self::$pdoConnection = null;
+    }
+
     private static function loadDb()
     {
         $pdo = self::getConnection();
