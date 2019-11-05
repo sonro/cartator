@@ -5,6 +5,7 @@ namespace App\Integration\Infrastructure\SourceAccess\Method;
 use App\Core\Application\DataTransfer\Dto\SourceDbDto;
 use App\Core\Application\SourceAccess\Method\SourceDbException;
 use App\Infrastructure\SourceAccess\Method\SourceDb\SafeMySQLSourceDb;
+use mysqli_result;
 use PDO;
 use PDOException;
 use PHPUnit\Framework\TestCase;
@@ -25,6 +26,15 @@ final class SafeMySQLSourceDbTest extends TestCase
      * @var PDO|null
      */
     private static $pdoConnection = null;
+
+    /**
+     * @var array
+     */
+    private static $dummyData = [
+        'test_name_1',
+        'test_name_2',
+        'test_name_3',
+    ];
 
     public function testCreateBadConnection()
     {
@@ -47,6 +57,23 @@ final class SafeMySQLSourceDbTest extends TestCase
         $this->assertNull($conn->getStats());
     }
 
+    public function testQuery()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $result = $conn->query('SELECT * FROM ?p WHERE id=?i', self::$testTable, 1);
+        $this->assertTrue(is_a($result, mysqli_result::class));
+        $row = $result->fetch_row();
+        $this->assertEquals(1, $row[0]);
+
+        $result = $conn->query('DELETE FROM ?p WHERE id=?i', self::$testTable, 1);
+        $this->assertTrue($result);
+
+        $result = $conn->query('SELECT * FROM ?p WHERE id=?i', self::$testTable, 1);
+        $this->assertTrue(is_a($result, mysqli_result::class));
+        $row = $result->fetch_row();
+        $this->assertNull($row);
+    }
+
     public static function setUpBeforeClass()
     {
         self::$sourceDbDto = new SourceDbDto(
@@ -67,6 +94,27 @@ final class SafeMySQLSourceDbTest extends TestCase
         $dbName = self::$sourceDbDto->getDb();
         $pdo->exec("DROP DATABASE IF EXISTS $dbName");
         self::$pdoConnection = null;
+    }
+
+    protected function setUp()
+    {
+        $pdo = self::getConnection();
+        $table = self::$testTable;
+        $sql = "INSERT INTO $table (name) VALUES ";
+        $dummies = count(self::$dummyData);
+        while ($dummies-- > 1) {
+            $sql .= '(?),';
+        }
+        $sql .= '(?)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(self::$dummyData);
+    }
+
+    protected function tearDown()
+    {
+        $pdo = self::getConnection();
+        $table = self::$testTable;
+        $pdo->exec("TRUNCATE TABLE $table");
     }
 
     private static function loadDb()
