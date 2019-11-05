@@ -224,7 +224,7 @@ interface SourceDbInterface
     /**
      * Function to get all query statistics.
      *
-     * @return array contains all executed queries with timings and errors
+     * @return array|null contains all executed queries with timings and errors or NULL if were none
      */
     public function getStats();
 }

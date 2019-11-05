@@ -182,7 +182,7 @@ final class SafeMySQLSourceDb implements SourceDbInterface
     public function getIndCol(string $index, string $query, ...$args)
     {
         try {
-            $data = $this->safeMySQL->getIndCol($query, ...$args);
+            $data = $this->safeMySQL->getIndCol($index, $query, ...$args);
             if (empty($data)) {
                 return false;
             }
@@ -207,11 +207,7 @@ final class SafeMySQLSourceDb implements SourceDbInterface
 
     public function whiteList(string $input, array $allowed, $default = false)
     {
-        try {
-            return $this->safeMySQL->whiteList($input, $allowed, $default);
-        } catch (Exception $e) {
-            throw new SourceDbException($e->getMessage(), $e->getCode());
-        }
+        return $this->safeMySQL->whiteList($input, $allowed, $default);
     }
 
     /**
@@ -219,16 +215,27 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function filterArray(array $input, array $allowed)
     {
-        try {
-            return $this->safeMySQL->filterArray($input, $allowed);
-        } catch (Exception $e) {
-            throw new SourceDbException($e->getMessage(), $e->getCode());
+        // implemented manually
+        // not calling SafeMySQL::filterArray due to buggy code
+        foreach ($input as $key => $value) {
+            if (!in_array($value, $allowed)) {
+                unset($input[$key]);
+            }
         }
+
+        return $input;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function lastQuery()
     {
-        return $this->safeMySQL->lastQuery();
+        try {
+            return $this->safeMySQL->lastQuery();
+        } catch (Exception $e) {
+            return null;
+        }
     }
 
     /**
