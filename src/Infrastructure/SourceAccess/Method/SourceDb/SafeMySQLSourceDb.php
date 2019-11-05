@@ -40,7 +40,11 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function query(string $query, ...$args)
     {
-        return $this->safeMySQL->query($query, ...$args);
+        try {
+            return $this->safeMySQL->query($query, ...$args);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -48,7 +52,11 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function fetch($result, $mode = self::RESULT_ASSOC)
     {
-        return $this->safeMySQL->fetch($result, $mode);
+        try {
+            return $this->safeMySQL->fetch($result, $mode);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -72,7 +80,11 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function numRows($result)
     {
-        return $this->safeMySQL->numRows($result);
+        try {
+            return $this->safeMySQL->numRows($result);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -80,7 +92,11 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function free($result)
     {
-        return $this->safeMySQL->free($result);
+        try {
+            $this->safeMySQL->free($result);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -88,7 +104,11 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function getOne(string $query, ...$args)
     {
-        return $this->safeMySQL->getOne($query, ...$args);
+        try {
+            return $this->safeMySQL->getOne($query, ...$args);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -96,7 +116,16 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function getRow(string $query, ...$args)
     {
-        return $this->safeMySQL->getRow($query, ...$args);
+        try {
+            $row = $this->safeMySQL->getRow($query, ...$args);
+            if ($row === null) {
+                return false;
+            }
+
+            return $row;
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -104,7 +133,16 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function getCol(string $query, ...$args)
     {
-        return $this->safeMySQL->getCol($query, ...$args);
+        try {
+            $col = $this->safeMySQL->getCol($query, ...$args);
+            if (empty($col)) {
+                return false;
+            }
+
+            return $col;
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -112,7 +150,11 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function getAll(string $query, ...$args)
     {
-        return $this->safeMySQL->getAll($query, ...$args);
+        try {
+            return $this->safeMySQL->getAll($query, ...$args);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -120,12 +162,20 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function getInd(string $index, string $query, ...$args)
     {
-        return $this->safeMySQL->getInd($index, $query, ...$args);
+        try {
+            return $this->safeMySQL->getInd($index, $query, ...$args);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     public function getIndCol(string $index, string $query, ...$args)
     {
-        return $this->safeMySQL->getIndCol($query, ...$args);
+        try {
+            return $this->safeMySQL->getIndCol($query, ...$args);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -133,12 +183,20 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function parse(string $query, ...$args)
     {
-        return $this->safeMySQL->parse($query, ...$args);
+        try {
+            return $this->safeMySQL->parse($query, ...$args);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     public function whiteList(string $input, array $allowed, $default = false)
     {
-        return $this->safeMySQL->whiteList($input, $allowed, $default);
+        try {
+            return $this->safeMySQL->whiteList($input, $allowed, $default);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -146,7 +204,11 @@ final class SafeMySQLSourceDb implements SourceDbInterface
      */
     public function filterArray(array $input, array $allowed)
     {
-        return $this->safeMySQL->filterArray($input, $allowed);
+        try {
+            return $this->safeMySQL->filterArray($input, $allowed);
+        } catch (Exception $e) {
+            throw new SourceDbException($e->getMessage(), $e->getCode());
+        }
     }
 
     public function lastQuery()

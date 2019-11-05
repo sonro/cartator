@@ -60,18 +60,196 @@ final class SafeMySQLSourceDbTest extends TestCase
     public function testQuery()
     {
         $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
-        $result = $conn->query('SELECT * FROM ?p WHERE id=?i', self::$testTable, 1);
+
+        $result = $conn->query('SELECT * FROM ?n WHERE id=?i', self::$testTable, 1);
         $this->assertTrue(is_a($result, mysqli_result::class));
         $row = $result->fetch_row();
         $this->assertEquals(1, $row[0]);
 
-        $result = $conn->query('DELETE FROM ?p WHERE id=?i', self::$testTable, 1);
+        $result = $conn->query('DELETE FROM ?n WHERE id=?i', self::$testTable, 1);
         $this->assertTrue($result);
 
-        $result = $conn->query('SELECT * FROM ?p WHERE id=?i', self::$testTable, 1);
+        $result = $conn->query('SELECT * FROM ?n WHERE id=?i', self::$testTable, 1);
         $this->assertTrue(is_a($result, mysqli_result::class));
         $row = $result->fetch_row();
         $this->assertNull($row);
+
+        $this->expectException(SourceDbException::class);
+        $result = $conn->query('SELECT * FROM ?n WHERE id=?i', 'unknown_table', 1);
+    }
+
+    public function testFetch()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $result = $conn->query('SELECT * FROM ?n', self::$testTable);
+        $this->assertTrue(is_a($result, mysqli_result::class));
+
+        $dummies = count(self::$dummyData);
+        for ($i = 0; $i < $dummies; ++$i) {
+            $row = $conn->fetch($result);
+            $this->assertIsArray($row);
+        }
+
+        $row = $conn->fetch($result);
+        $this->assertNull($row);
+    }
+
+    public function testAffectedRows()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $actualCount = 0;
+        $affectedRows = $conn->affectedRows();
+        $this->assertEquals($actualCount, $affectedRows);
+
+        $conn->query('SELECT * FROM ?n', self::$testTable);
+        $actualCount = count(self::$dummyData);
+        $affectedRows = $conn->affectedRows();
+        $this->assertEquals($actualCount, $affectedRows);
+
+        $conn->query('DELETE FROM ?n WHERE id=?i', self::$testTable, 1);
+        $actualCount = 1;
+        $affectedRows = $conn->affectedRows();
+        $this->assertEquals($actualCount, $affectedRows);
+
+        $conn->query('INSERT INTO ?n (name) VALUES (?s)', self::$testTable, 'test_name_4');
+        $actualCount = 1;
+        $affectedRows = $conn->affectedRows();
+        $this->assertEquals($actualCount, $affectedRows);
+
+        $conn->query('SELECT * FROM ?n', self::$testTable);
+        $actualCount = count(self::$dummyData);
+        $affectedRows = $conn->affectedRows();
+        $this->assertEquals($actualCount, $affectedRows);
+    }
+
+    public function testInsertId()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $expectedId = 0;
+        $actualId = $conn->insertId();
+        $this->assertEquals($expectedId, $actualId);
+
+        $conn->query('INSERT INTO ?n (name) VALUES (?s)', self::$testTable, 'test_name_4');
+        $expectedId = 4;
+        $actualId = $conn->insertId();
+        $this->assertEquals($expectedId, $actualId);
+    }
+
+    public function testNumRows()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $result = $conn->query('SELECT * FROM ?n', self::$testTable);
+        $expectedCount = count(self::$dummyData);
+        $actualCount = $conn->numRows($result);
+        $this->assertEquals($expectedCount, $actualCount);
+
+        $result = $conn->query('SELECT * FROM ?n WHERE id = ?i', self::$testTable, 4);
+        $expectedCount = 0;
+        $actualCount = $conn->numRows($result);
+        $this->assertEquals($expectedCount, $actualCount);
+    }
+
+    public function testFree()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $result = $conn->query('SELECT * FROM ?n', self::$testTable);
+        $conn->free($result);
+
+        $this->expectException(SourceDbException::class);
+        $conn->free($result);
+    }
+
+    public function testFetchAfterFree()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $result = $conn->query('SELECT * FROM ?n', self::$testTable);
+        $conn->free($result);
+
+        $this->expectException(SourceDbException::class);
+        $conn->fetch($result);
+    }
+
+    public function testNumRowsAfterFree()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $result = $conn->query('SELECT * FROM ?n', self::$testTable);
+        $conn->free($result);
+
+        $this->expectException(SourceDbException::class);
+        $conn->numRows($result);
+    }
+
+    public function testGetOne()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $sql = 'SELECT name FROM ?n WHERE id=?i';
+
+        $name = $conn->getOne($sql, self::$testTable, 1);
+        $this->assertEquals(self::$dummyData[0], $name);
+
+        $name = $conn->getOne($sql, self::$testTable, 4);
+        $this->assertFalse($name);
+
+        $this->expectException(SourceDbException::class);
+        $sql = 'SELECT bad FROM ?n WHERE id=?i';
+        $conn->getOne($sql, self::$testTable, 1);
+    }
+
+    public function testGetRow()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $sql = 'SELECT id, name FROM ?n WHERE id=?i';
+
+        $data = $conn->getRow($sql, self::$testTable, 1);
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('id', $data);
+        $this->assertArrayHasKey('name', $data);
+        $this->assertEquals(1, $data['id']);
+
+        $data = $conn->getRow($sql, self::$testTable, 5);
+        $this->assertFalse($data);
+
+        $this->expectException(SourceDbException::class);
+        $conn->getRow($sql, 'bad_table', 1);
+    }
+
+    public function testGetCol()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $sql = 'SELECT id FROM ?n WHERE name LIKE ?s';
+
+        $data = $conn->getCol($sql, self::$testTable, 'test%');
+        $this->assertIsArray($data);
+        $this->assertEquals(count(self::$dummyData), count($data));
+
+        $data = $conn->getCol($sql, self::$testTable, 'test_name_7');
+        $this->assertFalse($data);
+
+        $this->expectException(SourceDbException::class);
+        $conn->getCol($sql, 'bad_table', 1);
+    }
+
+    public function testGetAll()
+    {
+        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+
+        $result = $conn->getAll('SELECT * FROM ?n', self::$testTable);
+        foreach (self::$dummyData as $index => $dummyName) {
+            $this->assertEquals($dummyName, $result[$index]['name']);
+        }
+
+        $result = $conn->getAll('SELECT * FROM ?n WHERE id>?i', self::$testTable, 5);
+        $this->assertEmpty($result);
     }
 
     public static function setUpBeforeClass()
