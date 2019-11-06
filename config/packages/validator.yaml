@@ -7,3 +7,4 @@ framework:
         auto_mapping:
             App\Core\Domain\Resource\Model: []
             App\Core\Domain\Data\Model: []
+            App\Core\Domain\SourceAccess\Model: []
