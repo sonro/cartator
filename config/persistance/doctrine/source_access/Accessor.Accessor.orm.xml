@@ -13,7 +13,7 @@
             target-entity="App\Core\Domain\Resource\Model\SourceApp\SourceApp" 
             inversed-by="accessors" />
         <many-to-many field="supportedSourceQueries" 
-            target-entity="App\Core\Domain\SourceAccess\Model\SourceQuery\SourceQuery" />
+            target-entity="App\Core\Domain\SourceAccess\Model\SourceQuerier\SourceQuerier" />
     </entity>
 
 </doctrine-mapping>

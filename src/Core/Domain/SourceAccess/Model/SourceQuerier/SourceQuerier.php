@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Domain\SourceAccess\Model\SourceQuery;
+namespace App\Core\Domain\SourceAccess\Model\SourceQuerier;
 
 use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
 
-final class SourceQuery extends AbstractDomainEntity
+final class SourceQuerier extends AbstractDomainEntity
 {
     /**
      * @var string

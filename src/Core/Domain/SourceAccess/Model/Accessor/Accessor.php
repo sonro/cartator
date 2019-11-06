@@ -5,7 +5,7 @@ namespace App\Core\Domain\SourceAccess\Model\Accessor;
 use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
 use App\Core\Domain\Resource\Model\SourceApp\SourceApp;
 use App\Core\Domain\SourceAccess\Model\DataType\DataType;
-use App\Core\Domain\SourceAccess\Model\SourceQuery\SourceQuery;
+use App\Core\Domain\SourceAccess\Model\SourceQuerier\SourceQuerier;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -163,34 +163,34 @@ final class Accessor extends AbstractDomainEntity
     }
 
     /**
-     * Add support for a SourceQuery.
+     * Add support for a SourceQuerier.
      *
-     * @param SourceQuery $sourceQuery
+     * @param SourceQuerier $sourceQuerier
      *
      * @return self
      */
-    public function addSupportedSourceQuery(SourceQuery $sourceQuery): self
+    public function addSupportedSourceQuery(SourceQuerier $sourceQuerier): self
     {
-        if ($this->supportedSourceQueries->contains($sourceQuery)) {
+        if ($this->supportedSourceQueries->contains($sourceQuerier)) {
             return $this;
         }
 
-        $this->supportedSourceQueries->add($sourceQuery);
+        $this->supportedSourceQueries->add($sourceQuerier);
 
         return $this;
     }
 
     /**
-     * Remove support for a SourceQuery.
+     * Remove support for a SourceQuerier.
      *
-     * @param SourceQuery $sourceQuery
+     * @param SourceQuerier $sourceQuerier
      *
      * @return self
      */
-    public function removeSupportedSourceQuery(SourceQuery $sourceQuery): self
+    public function removeSupportedSourceQuery(SourceQuerier $sourceQuerier): self
     {
-        if ($this->supportedSourceQueries->contains($sourceQuery)) {
-            $this->supportedSourceQueries->removeElement($sourceQuery);
+        if ($this->supportedSourceQueries->contains($sourceQuerier)) {
+            $this->supportedSourceQueries->removeElement($sourceQuerier);
         }
 
         return $this;

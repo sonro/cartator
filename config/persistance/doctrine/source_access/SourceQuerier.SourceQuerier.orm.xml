@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
-    <entity name="App\Core\Domain\SourceAccess\Model\SourceQuery\SourceQuery">
+    <entity name="App\Core\Domain\SourceAccess\Model\SourceQuerier\SourceQuerier">
         <field name="interfaceName" type="string" length="190" />
         <field name="className" type="string" length="190" unique="true" />
     </entity>
