@@ -69,4 +69,58 @@ final class SourceDbDtoHydratorTest extends TestCase
 
         $this->assertEquals($pureDto, $hydratedDto);
     }
+
+    public function testCreateModel()
+    {
+        $testDb = 'testName';
+        $testCharset = 'utf16';
+        $testHost = '127.0.0.1';
+        $testPort = 3301;
+        $testUser = 'testUser';
+        $testPass = 'testPass';
+
+        $dbHost = new DbHost();
+        $dbHost->setAddress($testHost);
+        $dbHost->setPort($testPort);
+
+        $dbUser = new DbUser();
+        $dbUser->setDbHost($dbHost);
+        $this->dbUserService->encodePassword($dbUser, $testPass);
+        $this->dbUserService->encodeUsername($dbUser, $testUser);
+
+        $expectedDb = new SourceDb();
+        $expectedDb->setDbHost($dbHost);
+        $expectedDb->setDbName($testDb);
+        $expectedDb->setDbCharset($testCharset);
+        $expectedDb->setDbUser($dbUser);
+
+        $dto = new SourceDbDto(
+            $testHost,
+            $testPort,
+            $testUser,
+            $testPass,
+            $testDb,
+            $testCharset
+        );
+
+        $hydratedDb = $this->hydrator->createModel($dto);
+
+        $this->assertInstanceOf(SourceDb::class, $hydratedDb);
+        $this->assertEquals(
+            $expectedDb->getDbHost(),
+            $hydratedDb->getDbHost(),
+        );
+        $this->assertEquals(
+            $expectedDb->getDbName(),
+            $hydratedDb->getDbName(),
+        );
+        $this->assertEquals(
+            $this->dbUserService->getPlainUsername($expectedDb->getDbUser()),
+            $this->dbUserService->getPlainUsername($hydratedDb->getDbUser())
+        );
+        $this->assertEquals(
+            $this->dbUserService->getPlainPassword($expectedDb->getDbUser()),
+            $this->dbUserService->getPlainPassword($hydratedDb->getDbUser())
+        );
+    }
 }
