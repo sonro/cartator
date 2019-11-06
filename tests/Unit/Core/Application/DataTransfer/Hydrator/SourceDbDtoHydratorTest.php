@@ -108,11 +108,11 @@ final class SourceDbDtoHydratorTest extends TestCase
         $this->assertInstanceOf(SourceDb::class, $hydratedDb);
         $this->assertEquals(
             $expectedDb->getDbHost(),
-            $hydratedDb->getDbHost(),
+            $hydratedDb->getDbHost()
         );
         $this->assertEquals(
             $expectedDb->getDbName(),
-            $hydratedDb->getDbName(),
+            $hydratedDb->getDbName()
         );
         $this->assertEquals(
             $this->dbUserService->getPlainUsername($expectedDb->getDbUser()),
