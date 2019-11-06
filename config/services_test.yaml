@@ -1,4 +1,8 @@
 # make services used in testing public
 services:
-    App\Core\Application\Service\DbUserService:
+    _defaults:
+        autowire: true
+        autoconfigure: true 
         public: true
+
+    App\Core\Application\SourceAccess\SourceQuery\Factory\SourceDbSourceQueryFactory: ~
