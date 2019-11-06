@@ -1,0 +1,4 @@
+# make services used in testing public
+services:
+    App\Core\Application\Service\DbUserService:
+        public: true
