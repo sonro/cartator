@@ -4,11 +4,11 @@ namespace App\Infrastructure\SourceAccess\Method\SourceDb;
 
 use App\Core\Application\DataTransfer\Dto\SourceDbDto;
 use App\Core\Application\SourceAccess\Method\SourceDbException;
-use App\Core\Application\SourceAccess\Method\SourceDbInterface;
+use App\Core\Application\SourceAccess\Method\SourceDbConnectionInterface;
 use Exception;
 use SafeMySQL;
 
-final class SafeMySQLSourceDb implements SourceDbInterface
+final class SafeMySQLSourceDbConnection implements SourceDbConnectionInterface
 {
     /**
      * @var SafeMySQL

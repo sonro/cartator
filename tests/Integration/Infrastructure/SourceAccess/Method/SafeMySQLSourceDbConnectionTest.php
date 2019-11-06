@@ -4,13 +4,13 @@ namespace App\Integration\Infrastructure\SourceAccess\Method;
 
 use App\Core\Application\DataTransfer\Dto\SourceDbDto;
 use App\Core\Application\SourceAccess\Method\SourceDbException;
-use App\Infrastructure\SourceAccess\Method\SourceDb\SafeMySQLSourceDb;
+use App\Infrastructure\SourceAccess\Method\SourceDb\SafeMySQLSourceDbConnection;
 use mysqli_result;
 use PDO;
 use PDOException;
 use PHPUnit\Framework\TestCase;
 
-final class SafeMySQLSourceDbTest extends TestCase
+final class SafeMySQLSourceDbConnectionTest extends TestCase
 {
     /**
      * @var SourceDbDto
@@ -48,18 +48,18 @@ final class SafeMySQLSourceDbTest extends TestCase
             'utf8'
         );
 
-        new SafeMySQLSourceDb($badSourceDbDto);
+        new SafeMySQLSourceDbConnection($badSourceDbDto);
     }
 
     public function testCreateGoodConnection()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
         $this->assertNull($conn->getStats());
     }
 
     public function testQuery()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $result = $conn->query('SELECT * FROM ?n WHERE id=?i', self::$testTable, 1);
         $this->assertTrue(is_a($result, mysqli_result::class));
@@ -80,7 +80,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testFetch()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $result = $conn->query('SELECT * FROM ?n', self::$testTable);
         $this->assertTrue(is_a($result, mysqli_result::class));
@@ -97,7 +97,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testAffectedRows()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $actualCount = 0;
         $affectedRows = $conn->affectedRows();
@@ -126,7 +126,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testInsertId()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $expectedId = 0;
         $actualId = $conn->insertId();
@@ -140,7 +140,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testNumRows()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $result = $conn->query('SELECT * FROM ?n', self::$testTable);
         $expectedCount = count(self::$dummyData);
@@ -155,7 +155,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testFree()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $result = $conn->query('SELECT * FROM ?n', self::$testTable);
         $conn->free($result);
@@ -166,7 +166,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testFetchAfterFree()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $result = $conn->query('SELECT * FROM ?n', self::$testTable);
         $conn->free($result);
@@ -177,7 +177,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testNumRowsAfterFree()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $result = $conn->query('SELECT * FROM ?n', self::$testTable);
         $conn->free($result);
@@ -188,7 +188,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testGetOne()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $sql = 'SELECT name FROM ?n WHERE id=?i';
 
@@ -205,7 +205,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testGetRow()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $sql = 'SELECT id, name FROM ?n WHERE id=?i';
 
@@ -224,7 +224,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testGetCol()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $sql = 'SELECT id FROM ?n WHERE name LIKE ?s';
 
@@ -241,7 +241,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testGetAll()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $data = $conn->getAll('SELECT * FROM ?n', self::$testTable);
         foreach (self::$dummyData as $index => $dummyName) {
@@ -257,7 +257,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testGetInd()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $data = $conn->getInd('name', 'SELECT * FROM ?n', self::$testTable);
         $this->assertIsArray($data);
@@ -274,7 +274,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testGetIndCol()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $sql = 'SELECT * FROM ?n WHERE id > ?i';
 
@@ -294,7 +294,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testParse()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $query = $conn->parse(' AND id < ?i', 500);
         $this->assertEquals(' AND id < 500', $query);
@@ -305,7 +305,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testParseWithResult()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $whereIdIsLow = $conn->parse(' AND id < ?i', 2);
         $data = $conn->getAll(
@@ -320,7 +320,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testWhiteList()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $allowedValues = [
             'wallace',
@@ -339,7 +339,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testFilterArray()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $allowedValues = [
             'wallace',
@@ -368,7 +368,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testLastQuery()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $lastQuery = $conn->lastQuery();
         $this->assertNull($lastQuery);
@@ -389,7 +389,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testGetStats()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $conn->getAll('SELECT * FROM ?n', self::$testTable);
         $conn->getOne('SELECT * FROM ?n WHERE id > ?i', self::$testTable, 500);
@@ -406,7 +406,7 @@ final class SafeMySQLSourceDbTest extends TestCase
 
     public function testBadStats()
     {
-        $conn = new SafeMySQLSourceDb(self::$sourceDbDto);
+        $conn = new SafeMySQLSourceDbConnection(self::$sourceDbDto);
 
         $stats = $conn->getStats();
         $this->assertNull($stats);

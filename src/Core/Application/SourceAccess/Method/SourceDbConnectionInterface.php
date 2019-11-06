@@ -4,7 +4,7 @@ namespace App\Core\Application\SourceAccess\Method;
 
 use App\Core\Application\DataTransfer\Dto\SourceDbDto;
 
-interface SourceDbInterface
+interface SourceDbConnectionInterface
 {
     const RESULT_ASSOC = MYSQLI_ASSOC;
     const RESULT_NUM = MYSQLI_NUM;
