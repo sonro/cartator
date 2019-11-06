@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Persistance\UnitOfWork\Doctrine;
 
-use App\Core\Domain\Persistance\UnitOfWorkInterface;
+use App\Core\Application\Persistance\UnitOfWorkInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineUnitOfWork implements UnitOfWorkInterface
