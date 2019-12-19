@@ -2,7 +2,7 @@
 
 namespace App\Tests\DummySourceQuery\SourceDb;
 
-use App\Core\Application\SourceAccess\Method\SourceDbSourceQueryTrait;
+use App\Core\Application\SourceAccess\Method\SourceDb\SourceDbSourceQueryTrait;
 use App\Tests\DummySourceQuery\FindAllDummySourceQueryInterface;
 
 final class FindAllDummySourceQuery implements FindAllDummySourceQueryInterface

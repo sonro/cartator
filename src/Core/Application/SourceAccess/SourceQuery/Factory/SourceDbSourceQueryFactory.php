@@ -4,7 +4,7 @@ namespace App\Core\Application\SourceAccess\SourceQuery\Factory;
 
 use App\Core\Application\DataTransfer\Dto\SourceDbDto;
 use App\Core\Application\DataTransfer\Hydrator\SourceDbDtoHydrator;
-use App\Core\Application\SourceAccess\Method\SourceDbConnectionFactoryInterface;
+use App\Core\Application\SourceAccess\Method\SourceDb\SourceDbConnectionFactoryInterface;
 use App\Core\Application\SourceAccess\SourceQuery\SourceQueryInterface;
 use App\Core\Domain\Resource\Model\SourceDb\SourceDb;
 use App\Core\Domain\SourceAccess\Model\SourceQuerier\SourceQuerier;
@@ -24,7 +24,7 @@ final class SourceDbSourceQueryFactory
     public function __construct(
         SourceDbDtoHydrator $hydrator,
         SourceDbConnectionFactoryInterface $dbFactory
-        ) {
+    ) {
         $this->hydrator = $hydrator;
         $this->dbFactory = $dbFactory;
     }
