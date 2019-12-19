@@ -2,9 +2,9 @@
 
 namespace App\Core\Domain\Resource\Model\SourceDb;
 
-use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Shared\Model\AbstractStampableDomainEntity;
 
-final class DbUser extends AbstractDomainEntity
+class DbUser extends AbstractStampableDomainEntity
 {
     /**
      * @var string

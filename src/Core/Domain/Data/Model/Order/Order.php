@@ -2,8 +2,8 @@
 
 namespace App\Core\Domain\Data\Model\Order;
 
-use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Shared\Model\AbstractStampableDomainEntity;
 
-final class Order extends AbstractDomainEntity
+class Order extends AbstractStampableDomainEntity
 {
 }

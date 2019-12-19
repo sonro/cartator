@@ -2,7 +2,7 @@
 
 namespace App\Core\Domain\Resource\Model\Shop;
 
-final class ShopMeta
+class ShopMeta
 {
     /**
      * @var string

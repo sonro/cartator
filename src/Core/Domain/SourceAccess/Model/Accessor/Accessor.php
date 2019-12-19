@@ -2,14 +2,15 @@
 
 namespace App\Core\Domain\SourceAccess\Model\Accessor;
 
-use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Shared\Model\AbstractStampableDomainEntity;
 use App\Core\Domain\Resource\Model\SourceApp\SourceApp;
 use App\Core\Domain\SourceAccess\Model\DataType\DataType;
+use App\Core\Domain\SourceAccess\Model\Shared\AccessorMethod;
 use App\Core\Domain\SourceAccess\Model\SourceQuerier\SourceQuerier;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-final class Accessor extends AbstractDomainEntity
+class Accessor extends AbstractStampableDomainEntity
 {
     /**
      * @var AccessorMethod

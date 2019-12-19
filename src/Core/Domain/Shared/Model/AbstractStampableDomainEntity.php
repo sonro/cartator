@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Domain\Resource\Model\Shared;
+namespace App\Core\Domain\Shared\Model;
 
 use DateTime;
 
@@ -9,13 +9,8 @@ use DateTime;
  *
  * Includes an Id and lifecycle methods
  */
-abstract class AbstractDomainEntity
+abstract class AbstractStampableDomainEntity extends AbstractDomainEntity
 {
-    /**
-     * @var int
-     */
-    private $id;
-
     /**
      * @var DateTime
      */
@@ -25,16 +20,6 @@ abstract class AbstractDomainEntity
      * @var DateTime
      */
     protected $updatedAt;
-
-    /**
-     * Get the value of id.
-     *
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
 
     /**
      * Trigger on entity creation.
