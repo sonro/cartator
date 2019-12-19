@@ -2,10 +2,10 @@
 
 namespace App\Core\Domain\Resource\Model\SourceAppVersion;
 
-use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Shared\Model\AbstractStampableDomainEntity;
 use App\Core\Domain\Resource\Model\SourceApp\SourceApp;
 
-final class SourceAppVersion extends AbstractDomainEntity
+class SourceAppVersion extends AbstractStampableDomainEntity
 {
     /**
      * @var SourceApp

@@ -2,12 +2,12 @@
 
 namespace App\Core\Domain\Resource\Model\SourceApp;
 
-use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Shared\Model\AbstractStampableDomainEntity;
 use App\Core\Domain\SourceAccess\Model\Accessor\Accessor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-final class SourceApp extends AbstractDomainEntity
+class SourceApp extends AbstractStampableDomainEntity
 {
     /**
      * @var string
@@ -52,8 +52,6 @@ final class SourceApp extends AbstractDomainEntity
     /**
      * Set the value of name.
      *
-     * @param string $name
-     *
      * @return self
      */
     public function setName(string $name)
@@ -75,8 +73,6 @@ final class SourceApp extends AbstractDomainEntity
 
     /**
      * Set the value of website.
-     *
-     * @param string $website
      *
      * @return self
      */
@@ -100,8 +96,6 @@ final class SourceApp extends AbstractDomainEntity
     /**
      * Set the value of autoDownload.
      *
-     * @param bool $autoDownload
-     *
      * @return self
      */
     public function setAutoDownload(bool $autoDownload)
@@ -123,8 +117,6 @@ final class SourceApp extends AbstractDomainEntity
 
     /**
      * Set the value of downloadsUrl.
-     *
-     * @param string $downloadsUrl
      *
      * @return self
      */
@@ -148,8 +140,6 @@ final class SourceApp extends AbstractDomainEntity
     /**
      * Associate an Accesssor with this SourceApp.
      *
-     * @param Accessor $accessor
-     *
      * @return self
      */
     public function addAccessor(Accessor $accessor)
@@ -167,8 +157,6 @@ final class SourceApp extends AbstractDomainEntity
 
     /**
      * Disassociate an Accessor with this SourceApp.
-     *
-     * @param Accessor $accessor
      *
      * @return self
      */

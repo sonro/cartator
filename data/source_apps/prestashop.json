@@ -1,0 +1,6 @@
+{
+    "name": "prestashop",
+    "website": "https://prestashop.com",
+    "downloadsUrl": "https://github.com/PrestaShop/PrestaShop/releases",
+    "autoDownload": true
+}

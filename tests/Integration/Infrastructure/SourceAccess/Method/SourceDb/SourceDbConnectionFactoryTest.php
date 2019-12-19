@@ -3,8 +3,8 @@
 namespace App\Unit\Infrastructure\SourceAccess\Method\SourceDb;
 
 use App\Core\Application\DataTransfer\Dto\SourceDbDto;
-use App\Core\Application\SourceAccess\Method\SourceDbConnectionInterface;
-use App\Core\Application\SourceAccess\Method\SourceDbException;
+use App\Core\Application\SourceAccess\Method\SourceDb\SourceDbConnectionInterface;
+use App\Core\Application\SourceAccess\Method\SourceDb\SourceDbException;
 use App\Infrastructure\SourceAccess\Method\SourceDb\SourceDbConnectionFactory;
 use App\Tests\Integration\SourceDbTestCase;
 

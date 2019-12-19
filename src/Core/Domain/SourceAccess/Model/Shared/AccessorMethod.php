@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Core\Domain\SourceAccess\Model\Accessor;
+namespace App\Core\Domain\SourceAccess\Model\Shared;
 
-final class AccessorMethod
+class AccessorMethod
 {
-    const CARTATOR_API = 'cartator-api';
-    const SOURCE_DB = 'source-db';
-    const SOURCE_API = 'source-api';
+    const CARTATOR_API = 'cartator_api';
+    const SOURCE_DB = 'source_db';
+    const SOURCE_API = 'source_api';
     const CUSTOM = 'custom';
 
     /**

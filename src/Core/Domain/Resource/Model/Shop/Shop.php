@@ -3,9 +3,9 @@
 namespace App\Core\Domain\Resource\Model\Shop;
 
 use App\Core\Domain\Resource\Model\Installation\Installation;
-use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Shared\Model\AbstractStampableDomainEntity;
 
-final class Shop extends AbstractDomainEntity
+class Shop extends AbstractStampableDomainEntity
 {
     /**
      * @var string

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Domain\Persistance;
+namespace App\Core\Application\Persistance;
 
 interface UnitOfWorkInterface
 {

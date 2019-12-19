@@ -2,12 +2,12 @@
 
 namespace App\Core\Domain\Resource\Model\Installation;
 
-use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Shared\Model\AbstractStampableDomainEntity;
 use App\Core\Domain\Resource\Model\SourceAppVersion\SourceAppVersion;
 use App\Core\Domain\Resource\Model\SourceDb\SourceDb;
 use App\Core\Domain\SourceAccess\Model\Accessor\Accessor;
 
-final class Installation extends AbstractDomainEntity
+class Installation extends AbstractStampableDomainEntity
 {
     /**
      * @var string

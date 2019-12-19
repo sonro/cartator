@@ -6,7 +6,7 @@
     
     <entity name="App\Core\Domain\SourceAccess\Model\Accessor\Accessor">
         <embedded name="method" 
-            class="App\Core\Domain\SourceAccess\Model\Accessor\AccessorMethod" />
+            class="App\Core\Domain\SourceAccess\Model\Shared\AccessorMethod" />
         <many-to-many field="supportedDataTypes" 
             target-entity="App\Core\Domain\SourceAccess\Model\DataType\DataType" />
         <many-to-many field="supportedSourceApps" 

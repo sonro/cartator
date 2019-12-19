@@ -2,9 +2,9 @@
 
 namespace App\Core\Domain\SourceAccess\Model\DataType;
 
-use App\Core\Domain\Resource\Model\Shared\AbstractDomainEntity;
+use App\Core\Domain\Shared\Model\AbstractStampableDomainEntity;
 
-final class DataType extends AbstractDomainEntity
+class DataType extends AbstractStampableDomainEntity
 {
     /**
      * @var string
