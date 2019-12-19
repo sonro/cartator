@@ -3,7 +3,7 @@
 namespace App\Integration\Infrastructure\SourceAccess\Method\SourceDb;
 
 use App\Core\Application\DataTransfer\Dto\SourceDbDto;
-use App\Core\Application\SourceAccess\Method\SourceDbException;
+use App\Core\Application\SourceAccess\Method\SourceDb\SourceDbException;
 use App\Infrastructure\SourceAccess\Method\SourceDb\SafeMySQLSourceDbConnection;
 use App\Tests\Integration\SourceDbTestCase;
 use mysqli_result;
