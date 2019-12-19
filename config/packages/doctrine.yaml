@@ -22,7 +22,6 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/config/persistance/doctrine/resource'
                 prefix: 'App\Core\Domain\Resource\Model'
-                alias: App
             Data:
                 is_bundle: false
                 type: xml
@@ -33,3 +32,8 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/config/persistance/doctrine/source_access'
                 prefix: 'App\Core\Domain\SourceAccess\Model'
+            Shared:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/persistance/doctrine/shared'
+                prefix: 'App\Core\Domain\Shared\Model'
